@@ -55,8 +55,40 @@ function countVowels($inputString)
     return $vowelCount;
 }
 
+function shiftLetters($inputString) 
+{
+// //lowercase alphabet provided
+//     $lower = "abcdefghijklmnopqrstuvwxyz"; 
+// //uppercase alphabet translated from lower
+//     $upper = strtoupper($lower);
+// //concatenate both
+//     $lower = $lower . $upper;
+// //split string to array on each character
+//     $alphabet = str_split($lower);
+//     $offsetAlpha = $alphabet;
+//     $x = array_shift($offsetAlpha);
+//     $offsetAlpha = [$x]
+
+//     var_dump($alphabet);
+
+    ///older code
+    // $shifts = [];
+    // foreach($letters as $key => $value) 
+    // {
+    //     $shifts[]=[$value];
+    // }
+    // $x = array_shift($shifts);
+    // $shifts[]=[$x];
+    // $shifted = [];
+    // foreach($shifts as $key => $value) {
+    //     $shifted[] = [$letters[$key] => $value];
+    // }
 
 
 
+
+}
+
+echo shiftLetters($input9);
 
 require 'index-view.php';
