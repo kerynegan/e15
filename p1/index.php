@@ -14,6 +14,8 @@ $input8 = "AeIoU"; //5 vowels
 $input9 = "The zoo is open"; // "Uif app jt pqfo"
 $input10 = "foobar@1"; // "gppcbs@1"
 $input11 = "aAb"; // "bBc"
+#example inputs for the name game
+$input12 = "Keryn";
 
 
 #function to check if palindrome
@@ -57,38 +59,40 @@ function countVowels($inputString)
 
 function shiftLetters($inputString) 
 {
-// //lowercase alphabet provided
-//     $lower = "abcdefghijklmnopqrstuvwxyz"; 
-// //uppercase alphabet translated from lower
-//     $upper = strtoupper($lower);
-// //concatenate both
-//     $lower = $lower . $upper;
-// //split string to array on each character
-//     $alphabet = str_split($lower);
-//     $offsetAlpha = $alphabet;
-//     $x = array_shift($offsetAlpha);
-//     $offsetAlpha = [$x]
+    echo "My input is '<span id='result'>" . $inputString . "</span>.' Shifted by one letter, my result is now '";
+    $shift = str_split($inputString);
+    foreach($shift as $key => $value)
+    {
+        $s = ord($value);
+        if(($s>=65 and $s<90) || ($s>=97 and $s<122)) {
+            $shift[$key] = chr($s+1);
+        } else if ($s === 90) {
+            $shift[$key] = chr(65);
+        } else if ($s === 122) {
+            $shift[$key] = chr(97);
+        }
 
-//     var_dump($alphabet);
-
-    ///older code
-    // $shifts = [];
-    // foreach($letters as $key => $value) 
-    // {
-    //     $shifts[]=[$value];
-    // }
-    // $x = array_shift($shifts);
-    // $shifts[]=[$x];
-    // $shifted = [];
-    // foreach($shifts as $key => $value) {
-    //     $shifted[] = [$letters[$key] => $value];
-    // }
-
-
-
+    }
+    $shift = implode('',$shift);
+    echo "<span id='result'>" . $shift . "</span>.' <br />";
 
 }
 
-echo shiftLetters($input9);
+function nameGame($inputString) {
+    //split off first letter of string, assign to variable, and check it
+    //if first letter is a vowel, use $first + trimmed input together througout
+    //else if first letter is a B/b, don't add b before trimmed input in first line
+    //else if first letter is a F/f, don't add f before trimmed input in second line
+    //else if first letter is an M/m, don't add m before trimmed input in third line
+    
+    /* echo: The Name Game!:
+    $inputString, $inputString, bo-([B].($trimmed or $inputString))
+    Bonana-fanna fo-([F] ($trimmed or $inputString))
+    Fee fi mo-([M] . ($trimmed or $inputString))
+    $inputString!
+    */
+}
+
+// 
 
 require 'index-view.php';
