@@ -1,5 +1,24 @@
-#result {
-    color:red;
-    font-weight: bold;
+body {
+	text-align: center;
+	background-color: #FAE1DD;
+	font-family: 'Merriweather', serif;
+}
+  
+h1,
+h2 {
+	font-family: 'Lora', serif;
+}
 
-} 
+#resultsDiv {
+	background-color: #E8E8E4;
+	width:50%;
+	padding:0 20px 20px;
+	margin-top:10px;
+	margin-left:25%;
+	border:2px solid #000;
+	border-radius: 5px;
+}
+
+.heavier {
+    font-weight: bold;
+}

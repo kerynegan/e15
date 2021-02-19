@@ -31,8 +31,8 @@ function isPalindrome($inputString)
 #function to count vowels
 function countVowels($inputString) 
 {
-//initialize a vowel count to keep track of count total
     $vowelCount = 0;
+
 //make the string lowercase to keep the loop shorter
     $inputString = strtolower($inputString);
 //create array of lowercase vowels
@@ -45,7 +45,7 @@ function countVowels($inputString)
     //and add it to the total
         $vowelCount += $count;
     }
-//then return the total.  
+
     if($vowelCount == 0) {
         $vowelCount = "no ";
     } 

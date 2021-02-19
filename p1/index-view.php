@@ -18,20 +18,22 @@
 
     </form>
     <?php  if($results) {?> 
-        <h2>Results:</h2>
 
-        <p> Your entry:</p>
-        <?php  echo  $answer . "<br />";?>
- 
-        <p> Is it a palindrome?</p>
-        <?php  echo  $palindrome . "<br />";?>
+        <div id="resultsDiv">
+            <h2>Results:</h2>
 
-        <p> How many vowels are there?</p>
-        <?php  echo "There are <span id='result'>" . $vowelCount . "</span> vowels!<br />";?>
-
-        <p> What happens if you shift the letters each by one?</p>
-        <?php  echo "You get <span id='result'>" . $shift . "</span>! Cool, huh?<br />";?>
+            <p class="heavier"> Your entry:</p>
+            <?php  echo  $answer . "<br />";?>
     
+            <p class="heavier">  Is it a palindrome?</p>
+            <?php  echo  $palindrome . "<br />";?>
+
+            <p class="heavier">  How many vowels are there?</p>
+            <?php  echo "There are " . $vowelCount . " vowels!<br />";?>
+
+            <p class="heavier"> What happens if you shift the letters each by one?</p>
+            <?php  echo "You get " . $shift . "! Cool, huh?<br />";?>
+        </div>
     
 
     <?php } ?>
