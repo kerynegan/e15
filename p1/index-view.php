@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Merriweather&display=swap" rel="stylesheet">
     <title>E15 Project 1</title>
 </head>
 <body>
@@ -11,7 +13,7 @@
         <h1>E15 Project 1</h1>
         <h2>String Processor</h2>
         
-        <label for='answer'>Please enter a word, phrase, or name:</label>
+        <label for='answer'>Please enter a word or phrase:</label>
         <input type='text' name='answer' id='answer'>
 
         <button type='submit'>Submit</button>
