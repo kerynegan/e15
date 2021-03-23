@@ -5,11 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CipherController;
 
 
-// Route::get('/', function () {
-//     // Eventually we'll want to return a view with our customized home page.
-//     // For now, we’ll just return a simple string
-//     return '<h1>Project 2 - Keryn Egan</h1>';
-// });
+Route::get('/', [CipherController::class, 'show']); 
+// Route::get('/search', [BookController::class, 'search']); //search from book
 
-# Update your route to look like this:
-Route::get('/', [CipherController::class, 'show']);
+Route::get('/create', [CipherController::class, 'create']);//--->re-route this to /
+
+Route::post('/', [CipherController::class,  'store']);

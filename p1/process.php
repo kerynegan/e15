@@ -1,4 +1,7 @@
 <?php
+
+require 'Student.php';
+
 session_start();
 
 $answer = $_POST['answer'];
@@ -7,6 +10,13 @@ $results = null;
 $palindrome = null;
 $vowelCount = null;
 $shit = null;
+
+$student = new Student(99);
+
+$id = $student->getId();
+
+var_dump($id);
+echo $id;
 
 #function to check if palindrome
 function isPalindrome($inputString)
@@ -83,7 +93,7 @@ $results['answer'] = $answer;
 $results["palindrome"] = $palindrome;
 $results["vowelCount"] = $vowelCount;
 $results["shift"] = $shift;
-
+$results["id"] = $id;
 
 
 $_SESSION['results'] = $results;

@@ -11,7 +11,7 @@ if(isset($_SESSION['results'])) {
     $palindrome = $_SESSION['results']['palindrome'];
     $vowelCount = $_SESSION['results']['vowelCount'];
     $shift = $_SESSION['results']['shift'];
-
+    $id = $_SESSION['results']['id'];
 
     $_SESSION['results'] = null;
 }

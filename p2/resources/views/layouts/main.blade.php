@@ -11,7 +11,7 @@
 <body>
 
 <header>
-
+    @yield('header')
 </header>
 
 <section>

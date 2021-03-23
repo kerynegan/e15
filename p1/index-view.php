@@ -21,9 +21,10 @@
     </form>
     <?php  if($results) {?> 
 
+        
         <div id="resultsDiv">
             <h2>Results:</h2>
-
+            <?php  echo  $id . "<br />";?>
             <p class="heavier"> Your entry:</p>
             <?php  echo  $answer . "<br />";?>
     
