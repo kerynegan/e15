@@ -100,7 +100,7 @@ Columnar Ciphers
         <p>{{ $sortlr }}</p>
         <p>{{ $sorttb }}</p>
         {{-- <p>{{ $encodedarray}}</p> --}}
-        <ol>
+        {{-- <ol>
         @foreach($msgarray as $key => $value)
         <li>{{ $key }}: {{ $value }}</li>
         @endforeach
@@ -109,7 +109,51 @@ Columnar Ciphers
         @foreach($encodedarray as $key => $value)
         <li>{{ $key }}: {{ $value }}</li>
         @endforeach
-        </ol>
+        </ol> --}}
+
+        <table>
+            <tr>
+            @foreach($keywordarray as $key => $value)
+                <th>{{$value}}</th>
+            @endforeach
+            </tr>
+            {{-- <tr> --}}
+            @foreach($keywordarray as $key => $value)
+                    <tr class='{{$value . $key}}'>
+                    @foreach($decodedarray as $m => $msg)
+
+                        @if(($value . sprintf("%02d", $key))==substr($m,0,3))
+
+                            <td>{{$msg}}</td>
+ 
+                        @endif
+                    @endforeach
+                    </tr>
+            @endforeach
+            {{-- </tr> --}}
+        </table>
+
+        <table>
+            <tr>
+            <?php asort($alphakeys);?>
+            @foreach($alphakeys as $key => $value)
+                <th>{{substr($alphakeys[$key],0,1)}}</th>
+            @endforeach
+            </tr>
+            {{-- <tr> --}}
+            @foreach($alphakeys as $key => $value)
+                    <tr class='{{$value . $key}}'>
+                    @foreach($encodedarray as $m => $msg)
+                        @if($value == substr($m,0,3))
+
+                            <td>{{$msg}}</td>
+ 
+                        @endif
+                    @endforeach
+                    </tr>
+            @endforeach
+            {{-- </tr> --}}
+        </table>
 
     </div>
 @endif

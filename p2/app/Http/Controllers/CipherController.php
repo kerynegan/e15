@@ -10,14 +10,17 @@ class CipherController extends Controller
     public function show(Request $request)
     {
         return view('columnar/show')->with([
+            'decodedarray' => session('decodedarray', null),
             'msgarray' => session('msgarray', null),
+            'alphakeys' => session('alphakeys',null),
+            'keywordarray' => session('keywordarray', null),
             'encodedarray' => session('encodedarray', null),
             'keyword' => session('keyword', null),
             'message' => session('message', null),
             'alphaorder' => session('alphaorder', null),
             'specialcharacters' => session('specialcharacters', null),
-            'sortlr' => session('sortlr', null),
-            'sorttb' => session('sorttb', null),
+            'sortlr' => session('sortlr', 'left'),
+            'sorttb' => session('sorttb', 'top'),
         ]);
 
 
@@ -49,9 +52,9 @@ class CipherController extends Controller
             $msgarray = str_split($message);
         }
         //create an array from the keyword
-        $keywordArray = str_split($keyword);
+        $keywordarray = str_split($keyword);
         //get the length of both arrays.
-        $keywordcount = count($keywordArray);
+        $keywordcount = count($keywordarray);
         $messagecount = count($msgarray);
 
         //if the message array isn't evenly divisible by the keyword
@@ -70,60 +73,38 @@ class CipherController extends Controller
         };
         $newMsg =[];
 
-        // for($i=($keywordcount+1); $i>0; $i--){
-        //     for ($x=$messagecount; $x>=0; $x=-$i){
-        //         $s = $msgarray[$x];
-        //         $newMsg[] = $s;
-        //     }
-        // }
-        // $i = $messagecount;
-        // for($a = ($keywordcount + 1); $a>0; $a--){
-        //     foreach($msgarray as $i => $value) {
-        //         if ($i-- % $a == 0) {
-        //             if(isset($msgarray[$i])){
-        //                 $newMsg[] = $value;
-        //                 unset($msgarray[$i]);
-        //             }
-        //             continue;
-        //         }
-        //         else{
-        //             continue;
-        //         }
-        //     }
-        // }
-
-        $k = $keywordcount+1;
-        while($k>0){
-            for($x = 1; $x<=($messagecount+2); $x++){
-                if($x%$k==0){
-                    if(isset($msgarray[($x-1)])){
-                        $newMsg[] = $msgarray[($x-1)];
-                        unset($msgarray[($x-1)]);
-                    }
-                }
+        // $k = $keywordcount;
+        for($i = 0; $i < $keywordcount; $i++){
+            for($m=(0+$i); $m<$messagecount; $m+=$keywordcount){
+                $s = $msgarray[$m];
+                $newMsg[] = $s;
             }
-            $k--;
-        }
-        // krsort($newMsg);  
-
-        // dd($messagecount);
+        };
         // dd($msgarray);
-        // dd($newMsg);
-
+  
         $newKeys = [];
-
-        foreach($keywordArray as $value) {
-            for($i = 00; $i < $messagecount/$keywordcount; $i++){
-                $newKeys[] = $value . sprintf("%02d", $i);
+        $alphakeys = [];
+        foreach($keywordarray as $m => $value) {
+            $alphakeys[] = $value . sprintf("%02d", $m);  
+            for($i = 00; $i < $messagecount/$keywordcount; $i++){           
+                $newKeys[] = $value . sprintf("%02d", $m) . sprintf("%02d", $i);
             }
         }
-        dump($newKeys);
+        // dd($msgarray);
+        $decodedarray = array_combine ($newKeys, $msgarray);
         $encodedarray = array_combine ( $newKeys, $newMsg );
         ksort($encodedarray);
-        dump($encodedarray);
+        ksort($alphakeys);
+        // dd($encodedarray);
+        // dd($alphakeys);
+        // ksort($encodedarray);
+        // dd($encodedarray);
 
         return redirect('/columnar')->with([
+            'decodedarray' => $decodedarray,
+            'alphakeys' => $alphakeys,
             'msgarray' => $msgarray,
+            'keywordarray' => $keywordarray,
             'encodedarray' => $encodedarray,
             'keyword' => $keyword,
             'message' => $message,
@@ -135,3 +116,4 @@ class CipherController extends Controller
 
     }  
 }
+

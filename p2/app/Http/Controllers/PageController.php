@@ -8,18 +8,24 @@ class PageController extends Controller
 {
     public function show()
     {
-        $msgarray = session('msgarray', null);
+        $decodedarray = session('decodedarray',null);
+        $msgarray = session('msgarray',null);
+        $alphakeys = session('alphakeys', null);
+        $keywordarray = session('keywordarray', null);
         $encodedarray = session('encodedarray', null);
         $keyword = session('keyword', null);
         $message = session('message', null);
         $alphaorder = session('alphaorder', null);
         $specialcharacters = session('specialcharacters', null);
-        $sortlr = session('sortlr', null);
-        $sorttb = session('sorttb', null);
+        $sortlr = session('sortlr', 'left');
+        $sorttb = session('sorttb', 'top');
 
         
         return view('page/welcome', [
+            'decodedarray' => $decodedarray,          
             'msgarray' => $msgarray,
+            'alphakeys' => $alphakeys,
+            'keywordarray' => $keywordarray,
             'encodedarray' => $encodedarray,
             'keyword' => $keyword,
             'message' =>$message,
