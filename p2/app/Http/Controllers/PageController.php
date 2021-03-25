@@ -15,10 +15,11 @@ class PageController extends Controller
         $encodedarray = session('encodedarray', null);
         $keyword = session('keyword', null);
         $message = session('message', null);
-        $alphaorder = session('alphaorder', null);
-        $specialcharacters = session('specialcharacters', null);
+        $alphaorder = session('alphaorder', false);
+        $specialcharacters = session('specialcharacters', false);
         $sortlr = session('sortlr', 'left');
         $sorttb = session('sorttb', 'top');
+        $display = session('display', null);
 
         
         return view('page/welcome', [
@@ -32,7 +33,8 @@ class PageController extends Controller
             'alphaorder' => $alphaorder,
             'specialcharacters' => $specialcharacters,
             'sortlr' => $sortlr,
-            'sorttb' =>$sorttb           
+            'sorttb' =>$sorttb,
+            'display' =>$display        
         ]);
  
 

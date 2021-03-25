@@ -21,6 +21,7 @@ class CipherController extends Controller
             'specialcharacters' => session('specialcharacters', null),
             'sortlr' => session('sortlr', 'left'),
             'sorttb' => session('sorttb', 'top'),
+            'display' => session('display', false),
         ]);
 
 
@@ -40,6 +41,7 @@ class CipherController extends Controller
         $specialcharacters = $request->input('specialcharacters', false);
         $sortlr = $request->input('sortlr', 'left');
         $sorttb = $request->input('sorttb', 'top');
+        $display = $request->input('display', null);
 
         //turn keywords and messages to uppercase.
         $keyword = strtoupper(preg_replace('%\W%',"", $keyword));
@@ -56,32 +58,45 @@ class CipherController extends Controller
         //get the length of both arrays.
         $keywordcount = count($keywordarray);
         $messagecount = count($msgarray);
+        // if($sortlr == 'right'){
+        //     krsort($msgarray);         
+        // };
 
-        //if the message array isn't evenly divisible by the keyword
+        /*
+        if the message array isn't evenly divisible by the keyword
+        add random letters to the end of the message array until it is evenly divisible.
+        */
         if( $messagecount % $keywordcount!= 0) {
             $x = $keywordcount - ($messagecount % $keywordcount);
-            //add random letters to the end of the message array until it is evenly divisible.
             for($i = 0; $i < $x; $i++ ){
                 $rand = random_int(65,90);
                 $msgarray[] = chr($rand);
             }
         };
+
+        //get the new length of the message array
         $messagecount = count($msgarray);
 
-        if(!$sortlr){
-            krsort($msgarray);         
-        };
-        $newMsg =[];
-
-        // $k = $keywordcount;
+        //push a resorted message array (sorted based on the keyword length)
+        $newmsg =[];
         for($i = 0; $i < $keywordcount; $i++){
             for($m=(0+$i); $m<$messagecount; $m+=$keywordcount){
                 $s = $msgarray[$m];
-                $newMsg[] = $s;
+                $newmsg[] = $s;
             }
         };
-        // dd($msgarray);
-  
+
+        /*
+        To sort the message by the keyword in the table, we need to know  
+        a)how many times letters in the keyword are repeated and what order 
+        all duplicates were originally in, and b) based on the length of the message, 
+        how many rows we'll need of each letter in the keyword. 
+        To get there, we'll create two arrays. 
+        The first is equal to the length of the keyword, and combines the key value + the key number,
+        (with a leading zero) to sort correctly.
+        The second array is the same concept, but combined with the length of the message
+        in order to get us a sortable key for the associative arrays.
+        */
         $newKeys = [];
         $alphakeys = [];
         foreach($keywordarray as $m => $value) {
@@ -90,15 +105,13 @@ class CipherController extends Controller
                 $newKeys[] = $value . sprintf("%02d", $m) . sprintf("%02d", $i);
             }
         }
-        // dd($msgarray);
+        /*create the associative arrays, one each for the original message (+ extra letters)
+        and the other for the encoded array (still +extra letters!) */
         $decodedarray = array_combine ($newKeys, $msgarray);
-        $encodedarray = array_combine ( $newKeys, $newMsg );
+        $encodedarray = array_combine ($newKeys, $newmsg );
+
+        //then we can sort the encoded message array by key to get the right order.
         ksort($encodedarray);
-        ksort($alphakeys);
-        // dd($encodedarray);
-        // dd($alphakeys);
-        // ksort($encodedarray);
-        // dd($encodedarray);
 
         return redirect('/columnar')->with([
             'decodedarray' => $decodedarray,
@@ -111,7 +124,8 @@ class CipherController extends Controller
             'alphaorder' => $alphaorder,
             'specialcharacters' => $specialcharacters,
             'sortlr' => $sortlr,
-            'sorttb' => $sorttb
+            'sorttb' => $sorttb,
+            'display' => $display,
             ])->withInput();
 
     }  

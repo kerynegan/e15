@@ -60,101 +60,70 @@ Columnar Ciphers
         <label for='left'>Bottom to Top</label>
         <input type='radio' name='sorttb' id='bottom' value='bottom' {{(old('sorttb') == 'bottom') ? 'checked' : ''}} ><br />
 
+        <label for='display'>Display message and encoding in table form? (Default is yes)</label>
+        <input type='checkbox' value='true' name='display' id='display' checked><br />
+
         <input type='submit' class='btn btn-primary' value='Submit'>
     </form>
 
-{{-- 
+
 @if(count($errors) > 0)
     <ul class='alert'>
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
         @endforeach
     </ul>
-@endif --}}
+@endif
 
 @if(!is_null($keyword))
     <div class='results alert alert-primary'>
-
-
-
-        {{-- {{ count($searchResults) }} 
-        {{ Str::plural('Result', count($searchResults)) }}: --}}
-
-        {{-- <ul>
-            @foreach($formData as $key => $value)
-            <li>{{ $key }}: {{ $value }}</li>
-            @endforeach
-        </ul> --}}
-        {{-- <table>
-            <tr>
-                @foreach($keyword as $key => $value)
-                <th> {{$value}}</th>     
-                @endforeach
-            </tr>
-        </table> --}}
-
+{{-- @if(!is_null($display)) --}}
         <p>{{ $keyword }}</p>
         <p>{{ $message }}</p>
         <p>{{ $alphaorder }}</p>
         <p>{{ $specialcharacters }}</p>
         <p>{{ $sortlr }}</p>
         <p>{{ $sorttb }}</p>
-        {{-- <p>{{ $encodedarray}}</p> --}}
-        {{-- <ol>
-        @foreach($msgarray as $key => $value)
-        <li>{{ $key }}: {{ $value }}</li>
-        @endforeach
-        </ol>
-        <ol>
-        @foreach($encodedarray as $key => $value)
-        <li>{{ $key }}: {{ $value }}</li>
-        @endforeach
-        </ol> --}}
 
-        <table>
-            <tr>
-            @foreach($keywordarray as $key => $value)
-                <th>{{$value}}</th>
-            @endforeach
-            </tr>
-            {{-- <tr> --}}
-            @foreach($keywordarray as $key => $value)
-                    <tr class='{{$value . $key}}'>
-                    @foreach($decodedarray as $m => $msg)
-
-                        @if(($value . sprintf("%02d", $key))==substr($m,0,3))
-
-                            <td>{{$msg}}</td>
- 
-                        @endif
-                    @endforeach
+        <p>
+            @foreach($encodedarray as $key => $value){{$value}}@endforeach
+        </p>
+            <table>
+                <tr>
+                @foreach($keywordarray as $key => $value)
+                    <th>{{$value}}</th>
+                @endforeach
+                </tr>
+                @foreach($keywordarray as $key => $value)
+                    <tr>
+                        @foreach($decodedarray as $m => $msg)
+                            @if(($value . sprintf("%02d", $key))==substr($m,0,3))
+                                <td>{{$msg}}</td>
+                            @endif
+                        @endforeach
                     </tr>
-            @endforeach
-            {{-- </tr> --}}
-        </table>
+                @endforeach
+            </table>
 
-        <table>
-            <tr>
-            <?php asort($alphakeys);?>
-            @foreach($alphakeys as $key => $value)
-                <th>{{substr($alphakeys[$key],0,1)}}</th>
-            @endforeach
-            </tr>
-            {{-- <tr> --}}
-            @foreach($alphakeys as $key => $value)
-                    <tr class='{{$value . $key}}'>
-                    @foreach($encodedarray as $m => $msg)
-                        @if($value == substr($m,0,3))
+            <table>
+                <tr>
+                <?php asort($alphakeys);?>
+                @foreach($alphakeys as $key => $value)
+                    <th>{{substr($alphakeys[$key],0,1)}}</th>
+                @endforeach
+                </tr>
 
-                            <td>{{$msg}}</td>
- 
-                        @endif
-                    @endforeach
+                @foreach($alphakeys as $key => $value)
+                    <tr>
+                        @foreach($encodedarray as $m => $msg)
+                            @if($value == substr($m,0,3))
+                                <td>{{$msg}}</td>
+                            @endif
+                        @endforeach
                     </tr>
-            @endforeach
-            {{-- </tr> --}}
-        </table>
-
+                @endforeach
+            </table>
+        {{-- @endif --}}
     </div>
 @endif
 </div>
