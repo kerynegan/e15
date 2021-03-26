@@ -3,9 +3,13 @@
 + Production URL: <[http://e15p2.kerynegan.me](http://e15p2.kerynegan.me)
 
 ## Outside resources
+### Functionality 
 + [Array_combine function](https://www.php.net/manual/en/function.array-combine.php) for combining key + message arrays
 + [kSort function](https://www.php.net/manual/en/function.ksort.php) for resorting the message array
 + [random_int function](https://www.php.net/manual/en/function.random-int.php), [ASCII table](https://www.man7.org/linux/man-pages/man7/ascii.7.html) and [chr function](https://www.php.net/manual/en/function.chr.php) for adding random letters to the end of the message string.
++ [Array_reverse](https://www.php.net/manual/en/function.array-reverse.php) and [rsort](https://www.php.net/manual/en/function.rsort.php)
+### Styling
++ [CSS tables side-by-side](https://www.w3schools.com/howto/howto_css_table_side_by_side.asp)
 
 ## Notes for instructor
 I originally tried to do this using POST. I was quickly able to recreate the functionality to dump the request, but kept getting errors trying to write the POST request to the page (I had a few errors, I assume from the way I set up my routes and views, such as my variables kept returning as null, the POST method is not supported for this route, etc.) 
