@@ -10,6 +10,12 @@ header {
     background-color: #f1f1f1;
     padding:10px 10px 30px;
     margin:10px auto;
-    width:80%;
+    width:85%;
     border-radius:20px;
+}
+.message {
+    width:45%;
+    margin: 5px auto;
+    word-wrap:break-word;
+    text-align:center;
 }

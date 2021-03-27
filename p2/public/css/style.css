@@ -7,6 +7,9 @@ header {
     text-align: center;
     margin-top: 20px;
 }
+.logo {
+    width:60%;
+}
 nav {
     display:block;
     border-top: 1px solid #eee;
@@ -44,19 +47,15 @@ nav ul li a:hover {
     color: #88168b;
 }
 #columnarform {
-    width:45%;
-    margin:10px auto;
+    width:50%;
+    margin:10px 25%;
     text-align:left;
 }
-/* #columnarform input[type='text'],
-#columnarform input[type='textarea'],
-#columnarform input[type='radio'],
-#columnarform input[type='checkbox']{
-    margin:0 10px;
-} */
+
 #columnarform input[type='textarea']{
     margin:10px;
 }
+
 #columnarform input[type='submit'].btn{
     text-align:center;
     margin:10px auto;
@@ -91,7 +90,7 @@ nav ul li a:hover {
 }
   
 .row {
-    display: flex;s
+    display: flex;
     width:100%;
     margin-left:-5px;
     margin-right:-5px;
@@ -110,10 +109,28 @@ table {
     border: 1px solid #ddd;
   }
   th, td {
-    text-align: left;
-    padding: 16px;
+    text-align: center;
+    padding: 5px;
   }
-  
-  tr:nth-child(even) {
+  table.original th {
+      background-color:  rgb(183, 219, 218);
+      border-bottom:2px solid #000;
+  }
+  table.encoded th {
+    background-color:  rgb(183, 219, 218);
+    border-right:2px solid #000;
+}
+tr:nth-child(even) {
     background-color: #f2f2f2;
-  }
+}
+.alert {
+    background-color:lightpink;
+    width:50%;
+    border-radius:10px;
+    text-align:left;
+    padding:10px;
+    margin:10px auto;
+}
+.alert ul li{
+    margin-left:10px;
+}

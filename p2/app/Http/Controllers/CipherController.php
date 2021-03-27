@@ -10,18 +10,16 @@ class CipherController extends Controller
     public function show(Request $request)
     {
         return view('columnar/show')->with([
-            'decodedarray' => session('decodedarray', null),
-            'msgarray' => session('msgarray', null),
-            'alphakeys' => session('alphakeys',null),
             'keywordarray' => session('keywordarray', null),
+            'newmsg' => session('newmsg', null),
             'encodedarray' => session('encodedarray', null),
+            'encodedmsg' => session('encodedmsg', null),
             'keyword' => session('keyword', null),
             'message' => session('message', null),
             'alphaorder' => session('alphaorder', null),
-            'specialcharacters' => session('specialcharacters', null),
             'sortlr' => session('sortlr', 'left'),
             'sorttb' => session('sorttb', 'top'),
-            'display' => session('display', false),
+            'display' => session('display', null),
         ]);
 
 
@@ -29,8 +27,8 @@ class CipherController extends Controller
     public function create(Request $request) 
     {
         $request->validate([
-            'keyword' =>'required',
-            'message' => 'required',
+            'keyword' =>'required|alpha|min:4|max:15',
+            'message' => 'required|min:20',
             'sortlr' =>'required',
             'sorttb' => 'required',
         ]);
@@ -38,7 +36,6 @@ class CipherController extends Controller
         $keyword = $request->input('keyword', '');
         $message = $request->input('message', '');
         $alphaorder = $request->input('alphaorder', false);
-        $specialcharacters = $request->input('specialcharacters', false);
         $sortlr = $request->input('sortlr', 'left');
         $sorttb = $request->input('sorttb', 'top');
         $display = $request->input('display', null);
@@ -48,19 +45,15 @@ class CipherController extends Controller
         $message = strtoupper($message);
 
         //create the initial message array, with or without special characters
-        if (!$specialcharacters) {
-            $msgarray = str_split(preg_replace('%\W%',"", $message));
-        } else {
-            $msgarray = str_split($message);
-        }
+        
+        $msgarray = str_split(preg_replace("/[^A-Za-z]/","", $message));
+
         //create an array from the keyword
         $keywordarray = str_split($keyword);
         //get the length of both arrays.
         $keywordcount = count($keywordarray);
         $messagecount = count($msgarray);
-        // if($sortlr == 'right'){
-        //     krsort($msgarray);         
-        // };
+
 
         /*
         if the message array isn't evenly divisible by the keyword
@@ -77,52 +70,86 @@ class CipherController extends Controller
         //get the new length of the message array
         $messagecount = count($msgarray);
 
-        //push a resorted message array (sorted based on the keyword length)
+        //Create an array of rows from the original message
         $newmsg =[];
-        for($i = 0; $i < $keywordcount; $i++){
-            for($m=(0+$i); $m<$messagecount; $m+=$keywordcount){
-                $s = $msgarray[$m];
-                $newmsg[] = $s;
-            }
+        $x = 1;
+        $temparray = [];
+        for($m=0; $m<$messagecount; $m++){
+            $s = $msgarray[$m];
+            $temparray[] = $s;           
+            if($x % $keywordcount == 0){
+                //if user chooses to sort left to right, reverse the row array
+                if($sortlr == 'right'){
+                    $temparray = array_reverse($temparray);
+                }
+                $newmsg[] = $temparray;
+                unset($temparray);
+                $temparray = [];
+            }   
+            $x++;
+        };     
+        // dd($newmsg);
+        $rightmsg = [];
+        if($sortlr == 'right'){
+            foreach($newmsg as $key=>$row){
+                foreach($row as $k=>$value){
+                    $rightmsg[] = $value;
+                };
+            };
         };
 
         /*
-        To sort the message by the keyword in the table, we need to know  
-        a)how many times letters in the keyword are repeated and what order 
-        all duplicates were originally in, and b) based on the length of the message, 
-        how many rows we'll need of each letter in the keyword. 
-        To get there, we'll create two arrays. 
-        The first is equal to the length of the keyword, and combines the key value + the key number,
-        (with a leading zero) to sort correctly.
-        The second array is the same concept, but combined with the length of the message
-        in order to get us a sortable key for the associative arrays.
+        Create an array of rows for the encoded message with each row 
+        assigned a key that relates to the original letter from the keyword. 
+        Because keywords could have duplicate letters, to ensure they sort correctly,
+        the key combines the original letter and that letter's original key location.
         */
-        $newKeys = [];
-        $alphakeys = [];
-        foreach($keywordarray as $m => $value) {
-            $alphakeys[] = $value . sprintf("%02d", $m);  
-            for($i = 00; $i < $messagecount/$keywordcount; $i++){           
-                $newKeys[] = $value . sprintf("%02d", $m) . sprintf("%02d", $i);
+        $encodedarray =[];
+        foreach($keywordarray as $key=>$value){
+            $temparray = [];
+            $r = $value . $key;
+            for($m=$key; $m<$messagecount; $m+=$keywordcount){
+                if($sortlr == 'right'){
+                    $s = $rightmsg[$m];
+                } else{
+                    $s = $msgarray[$m];
+                }
+                $temparray[] = $s;
             }
+            //if user chooses to sort bottom to top, reverse the row array
+            if($sorttb == 'bottom'){
+                $temparray = array_reverse($temparray);
+            }
+            $encodedarray[$r] = $temparray;
+            unset($temparray);
+        };
+
+        /*sort by key so that the rows are in alpha order. 
+        or, if user chose to reverse that order, sort keys Z-A
+        */
+        if(!$alphaorder){
+            ksort($encodedarray);
+        } else {
+            krsort($encodedarray);
         }
-        /*create the associative arrays, one each for the original message (+ extra letters)
-        and the other for the encoded array (still +extra letters!) */
-        $decodedarray = array_combine ($newKeys, $msgarray);
-        $encodedarray = array_combine ($newKeys, $newmsg );
 
-        //then we can sort the encoded message array by key to get the right order.
-        ksort($encodedarray);
+        //Blade adds extra whitespace to nested @foreach loops, so let's export as string.
+        $encodedmsg = '';
+        foreach($encodedarray as $key => $row){
+            foreach($row as $k => $value){
+                $encodedmsg = $encodedmsg . $value;
+            };
+        };
 
-        return redirect('/columnar')->with([
-            'decodedarray' => $decodedarray,
-            'alphakeys' => $alphakeys,
-            'msgarray' => $msgarray,
+
+        return redirect('/columnar' . '#results')->with([
             'keywordarray' => $keywordarray,
+            'newmsg' => $newmsg,
             'encodedarray' => $encodedarray,
+            'encodedmsg' => $encodedmsg,
             'keyword' => $keyword,
             'message' => $message,
             'alphaorder' => $alphaorder,
-            'specialcharacters' => $specialcharacters,
             'sortlr' => $sortlr,
             'sorttb' => $sorttb,
             'display' => $display,
@@ -130,4 +157,3 @@ class CipherController extends Controller
 
     }  
 }
-

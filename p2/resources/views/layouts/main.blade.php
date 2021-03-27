@@ -12,11 +12,12 @@
 <body>
 
 <header>
-    <a href='/' alt='Return home'><img src='/images/logo.png' alt='Logo'></a>
+    <a href='/' alt='Return home'><img src='/images/logo.png' alt='Logo' class='logo'></a>
     <nav>
         <ul>
             <li><a href='/'>Home</a></li>
             <li><a href='/columnar'>Columnar Ciphers</a></li>
+             <li><a href='/columnar#encode'>Create Columnar Cipher</a></li>           
             <li><a href='/contact'>Contact</a></li>
         </ul>
     </nav>

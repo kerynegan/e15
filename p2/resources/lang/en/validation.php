@@ -136,6 +136,12 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'sortlr' => [
+            'required' => 'You must choose whether to sort from left-to-right or right-to-left.',
+        ],
+        'sorttb' => [
+            'required' => 'You must choose whether to sort top-to-bottom or bottom-to-top.',
+        ],     
     ],
 
     /*
