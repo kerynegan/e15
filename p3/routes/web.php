@@ -1,13 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\PracticeController;
 
-Route::any('/practice/{n?}', [PracticeController::class, 'index']);
-
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 Route::get('/debug', function () {
 
     $debug = [
@@ -34,17 +38,8 @@ Route::get('/debug', function () {
     dump($debug);
 });
 
-Route::get('/', [PageController::class, 'index']);
-Route::get('/support', [PageController::class, 'support']);
-
-
-Route::get('/books', [BookController::class, 'index']);
-Route::get('/search', [BookController::class, 'search']);
-// Make sure the create route comes before `/books/{slug?}` so it takes precedence
-Route::get('/books/create', [BookController::class, 'create']);
-
-// Note the use of the post method in this route
-Route::post('/books', [BookController::class, 'store']);
-Route::get('/books/{title}', [BookController::class, 'show']);
-Route::get('/search/{category}/{subcategory}', [BookController::class, 'search']);
-Route::get('/list', [BookController::class, 'list']);
+Route::get('/', function () {
+    // Eventually we'll want to return a view with our customized home page.
+    // For now, we’ll just return a simple string
+    return '<h1>Keryn\'s Project 3</h1>';
+});
