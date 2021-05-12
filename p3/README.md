@@ -1,6 +1,15 @@
+Notes to self for tomorrow
++ proposals can be associated with one course
++ proposals can be associated with one user
++ courses can be associated to one user
++ courses can be associated to many proposals
++ users can be associated to many courses
++ users can be associated to many proposals
+
 # Project 3
 + By: Keryn Egan
 + Production URL: <http://e15p3.kerynegan.me>
+
 
 ## Feature summary
 *Outline a summary of features that your application has. The following details are from a hypothetical project called "Movie Tracker". Note that it is similar to Bookmark, yet it has its own unique features. Delete this example and replace with your own feature summary*

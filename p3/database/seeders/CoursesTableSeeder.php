@@ -48,7 +48,7 @@ class CoursesTableSeeder extends Seeder
             $course->subject_code = $courseData['subject_code'];
             $course->college_code = $courseData['college_code'];
             $course->number = $courseData['number'];
-            // $course->user_id = $courseData['user_id'];
+            $course->user_id = $courseData['Instructor_id'];
             $course->schedule_type = $courseData['schedule_type'];
             $course->format = $courseData['format'];
             $course->department_code = $courseData['department_code'];

@@ -4,9 +4,53 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PracticeController extends Controller
-{
+{   
+    //course + instructors
+    public function practice8(Request $request)
+    {
+        # Eager load the author with the book
+        $courses = Course::with('user')->get();
+
+        foreach ($courses as $course) {
+            if ($course->user) {
+                dump($course->user->first_name.' '.$course->user->last_name.' taught '.$course->subject_code . ' ' . $course->college_code . $course->number);
+            } else {
+                dump($course->$course->subject_code . ' ' . $course->college_code . $course->number. ' has no instructor associated with it.');
+            }
+        }
+
+        dump($courses->toArray());
+    }
+    public function practice7(Request $request)
+    {
+        $user = User::where('email', '=', 'jill@harvard.edu')->first();
+
+        dump($user->first_name.' has taught the following courses: ');
+    
+        # Note how we can treate the `books` relationship as a dynamic propert ($user->books)
+        foreach ($user->courses as $course) {
+            dump($course->subject_code . ' ' . $course->college_code . $course->number);
+        }
+    }
+    public function practice6(Request $request)
+    {
+        # Retrieve the currently authenticated user via the Auth facade
+        $user = Auth::user();
+        dump($user->toArray());
+
+        # Retrieve the currently authenticated user via request object
+        $user = $request->user();
+        dump($user->toArray());
+
+        # Check if the user is logged in
+        if (Auth::check()) {
+            dump('The user ID is '.Auth::id());
+        }
+    }
     public function practice5()
     {
         //find (where) x OR (where) y

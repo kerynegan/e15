@@ -8,7 +8,7 @@ Deletion Confirmation Page
 @endsection
 
 @section('header')
-<h1>Are you Sure you want to delete this proposal?</h1>
+<h1>Are you sure you want to delete this proposal?</h1>
 
 @endsection
 

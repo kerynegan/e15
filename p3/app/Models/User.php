@@ -1,15 +1,23 @@
 <?php
-
+namespace App;
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    
+    public function courses()
+    {
+        # Author has many Books
+        # Define a one-to-many relationship.
+        return $this->hasMany('App\Models\Course');
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +25,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -41,3 +50,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 }
+

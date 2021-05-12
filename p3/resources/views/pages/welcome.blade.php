@@ -8,7 +8,16 @@ Welcome Page
 @endsection
 
 @section('header')
-<h1>Welcome</h1>
+
+@if(Auth::user())
+<h2>
+    Hello {{ Auth::user()->first_name }}!
+</h2>
+@else
+<h2> Hello! </h2>
+<a href="/login"> Would you like to log in?</a>
+@endif
+
 
 @endsection
 
