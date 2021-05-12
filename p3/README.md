@@ -5,7 +5,7 @@
 ## Feature summary
 *Outline a summary of features that your application has. The following details are from a hypothetical project called "Movie Tracker". Note that it is similar to Bookmark, yet it has its own unique features. Delete this example and replace with your own feature summary*
 
-+ Visitors can register/log in
++ Instructors can register/log in
 + Users can add/update/delete movies in their collection (title, release date, director, writer, summary, category)
 + There's a file uploader that's used to upload poster images for each movie
 + User's can toggle whether movies in their collection are public or private
@@ -25,7 +25,10 @@
 + There's a one-to-many relationship between `movies` and `users`
 
 ## Outside resources
-*Your list of outside resources go here*
+Note: I specifically used a curated JSON file isntead of the Faker data. It felt a little silly, but I liked the control, so here's the resources I used for those:
++ [Fake name + email address generator](https://homepage.net/name_generator/)
++ [Lorem ipsum generator](https://www.freeformatter.com/lorem-ipsum-generator.html)
++ [XLS to JSON](https://beautifytools.com/excel-to-json-converter.php)
 
 ## Notes for instructor
 *Any notes for me to refer to while grading; if none, omit this section*
