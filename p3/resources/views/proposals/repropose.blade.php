@@ -141,7 +141,7 @@ Repropose a course
     <button type='submit' dusk='add-proposal-button' class='btn btn-primary'>Propose this course</button>
  
     @if(count($errors) > 0)
-    <div class='alert alert-danger'>
+    <div class='alert alert-danger error'>
         Please correct the above errors.
     </div>
     @endif

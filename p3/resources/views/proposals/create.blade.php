@@ -13,11 +13,7 @@ Create new proposal
 @section('content')
 <h1>Propose a Course</h1>
 
-{{-- @if(!$course) --}}
-    <p>Did you mean to repropose a course you've taught before? Go to <a href="/courses">View My Courses</a> to repropose an existing course, or continue on to propose a new course.</p>
-{{-- @elseif($course) --}}
-    <p>If you prefer to propose a new course instead, please start again</a>.</p>
-{{-- @endif --}}
+    <p>Did you mean to repropose a course you've taught before? <br />Go to <strong><a href="/courses">View My Courses</a></strong> to repropose an existing course.</p>
 
 <form method='POST' action='/proposals/create'  >
     {{ csrf_field() }}  
@@ -138,7 +134,7 @@ Create new proposal
     <button type='submit' dusk='add-proposal-button' class='btn btn-primary'>Propose this course</button>
  
     @if(count($errors) > 0)
-    <div class='alert alert-danger'>
+    <div class='alert alert-danger error'>
         Please correct the above errors.
     </div>
     @endif

@@ -227,3 +227,12 @@ input:read-only,
 textarea:read-only {
     background-color: rgb(233, 233, 233);
   }
+.error {
+    background-color:salmon;
+    padding:1em;
+}
+.flash-alert {
+    background-color:rgb(31, 158, 147);
+    padding:1em;
+    color:#fff;
+}

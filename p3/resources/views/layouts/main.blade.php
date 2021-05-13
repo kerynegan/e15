@@ -25,6 +25,11 @@
                     <li><a href='/register' dusk='register-link'>Register</a></li>
                     <li>
             @else
+            {{-- @if(!Auth::user()->role->is)
+                    <a href='/login' dusk='login-link'>Login</a></li>
+                    <li><a href='/register' dusk='register-link'>Register</a></li>
+                    <li>
+            @else --}}
                     <form method='POST' id='logout' action='/logout' dusk='logout-link'>
                         {{ csrf_field() }}
                         <a href='#' onClick='document.getElementById("logout").submit();'>Logout</a>
@@ -33,10 +38,17 @@
             </li>
         </ul>
     </nav>
+
+
     @yield('header')
 </header>
 
 <section id="main">
+    @if(session('flash-alert'))
+        <div class='flash-alert' dusk='flash-alert'>
+        {{ session('flash-alert') }}
+    </div>
+    @endif
     @yield('content')
 </section>
 

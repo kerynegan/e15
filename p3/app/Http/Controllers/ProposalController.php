@@ -35,17 +35,32 @@ class ProposalController extends Controller
     }   
 
     //GET page to confirm deletion of proposal by id ('.../proposals/{id}/delete')
-    public function delete() {
-        return view('proposals/delete');
+    public function delete(Request $request, $id) {
+            $proposal = Proposal::with('user')->where('id', '=', $id)->first();
+            // $proposal = $request->user()->proposals->where('id', '=', $id)->first();
+    
+            if (!$proposal) {
+                return redirect('/proposals')->with([
+                    'flash-alert' => 'Proposal not found.'
+                ]);
+            }
+    
+        return view('proposals/delete', ['proposal' => $proposal]);
     } 
 
     //DELETE a proposal by id ('.../proposals/{id}')
-    public function destroy() {
-        return redirect('proposals/showproposals');
-        // ->with([
-        //     'flash-alert' => '“' . $book->title . '” was removed.'
-        // ])
-    }  
+    public function destroy(Request $request, $id) {
+
+        $proposal = $request->user()->proposals->where('id', '=', $id)->first();
+
+        // $proposal->users()->detach();
+
+        $proposal->delete();
+
+        return redirect('/proposals')->with([
+            'flash-alert' => '“' . $proposal->proposed_title . '” was deleted.'
+        ]);
+    }
 
     //GET index of courses i've taught in previous terms ('.../courses')
     public function showcourses(Request $request) {
@@ -89,13 +104,6 @@ class ProposalController extends Controller
             'proposed_title' => 'required',   
             'proposed_course_description' => 'required',
         ]);
-     
-         # Note: If validation fails, it will automatically redirect the visitor back to the form page
-         # and none of the code that follows will execute.
-     
-         # Code will eventually go here to add the book to the database,
-         # but for now we'll just dump the form data to the page for proof of concept
-        //  dump($request->all());
 
         $proposal = new Proposal();
 
@@ -126,6 +134,9 @@ class ProposalController extends Controller
 
        
         $proposal->save(); 
+        return redirect('/proposals')->with([
+            'flash-alert' => 'Your proposal was created.'
+        ]);
 
         // dd($request->toArray());
     }   
@@ -141,22 +152,15 @@ class ProposalController extends Controller
     public function recreate(Request $request, $id) {
 
         $user = $request->user();
-        // $request->validate([
-        //     'proposed_term'=> 'required',
-        //     'proposed_format' => 'required',
-        //     'proposed_title' => 'required',   
-        //     'proposed_course_description' => 'required',
-        // ]);
-        // if ($id != null) {
+        $request->validate([
+            'proposed_term'=> 'required',
+            'proposed_format' => 'required',
+            'proposed_title' => 'required',   
+            'proposed_course_description' => 'required',
+        ]);
+
             $course = $request->user()->courses->find($id);
-        // }
      
-         # Note: If validation fails, it will automatically redirect the visitor back to the form page
-         # and none of the code that follows will execute.
-     
-         # Code will eventually go here to add the book to the database,
-         # but for now we'll just dump the form data to the page for proof of concept
-        //  dump($request->all());
 
         $proposal = new Proposal();
 
