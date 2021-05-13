@@ -30,13 +30,16 @@ class ProposalController extends Controller
     }  
 
     //GET index of courses i've taught in previous terms ('.../courses')
-    public function showcourses() {
-        return view('proposals/showcourses');
+    public function showcourses(Request $request) {
+            $courses = $request->user()->courses->sortBy('subject_code');
+            return view('proposals/showcourses', ['courses' => $courses]);
     }   
 
     //GET details of course i taught in previous term ('.../courses/{id}')
-    public function detailcourses() {
-        return view('proposals/detailcourses');
+    public function detailcourses(Request $request, $id) {
+        $course = $request->user()->courses->where('id', '=', $id)->first();
+        // dd($course->toArray());
+        return view('proposals/detailcourses', ['course' => $course]);
     }    
 
     //GET the create new proposal form ('.../proposals/create')

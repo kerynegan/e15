@@ -19,16 +19,18 @@
                 <li><a href='/courses'>Previous Courses</a></li>   
                 <li><a href='/proposals/create'>Propose New Course</a> 
             @endif               
-                
+                <li>
             @if(!Auth::user())
-                    <li><a href='/login' dusk='login-link'>Login</a></li>
+                    <a href='/login' dusk='login-link'>Login</a></li>
                     <li><a href='/register' dusk='register-link'>Register</a></li>
+                    <li>
             @else
                     <form method='POST' id='logout' action='/logout' dusk='logout-link'>
                         {{ csrf_field() }}
-                        <li><a href='#' onClick='document.getElementById("logout").submit();'>Logout</a></li>
+                        <a href='#' onClick='document.getElementById("logout").submit();'>Logout</a>
                     </form>
             @endif  
+            </li>
         </ul>
     </nav>
     @yield('header')
@@ -39,7 +41,7 @@
 </section>
 
 <footer>
-
+<strong>HESWEB University | Home of the Bucks!</strong> <br /><small>A fake university for CSCI E-15 in Spring 2021 by Keryn Egan</small>
 </footer>
 
 </body>

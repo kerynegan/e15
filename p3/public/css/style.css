@@ -1,0 +1,271 @@
+html{
+    min-height: 100%;
+    position:relative;
+  }
+body {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background: rgb(29,97,139);
+    background: linear-gradient(121deg, rgba(29,97,139,1) 0%, rgba(12,57,84,1) 100%);
+    color:#fff;
+    font-size:1.2em;
+}
+header{
+    text-align:center;
+}
+footer{
+    margin:0 auto 0;
+    max-width:75%;
+    min-width:60%;
+    background-color:rgb(156, 124, 34);
+    color:#fff;
+    padding:2em 0 2em;
+}
+
+.logo {
+    max-width:75%;
+    min-width:60%;
+    background-color:#fff;
+}
+a.home-link {
+    margin-bottom:0;
+}
+
+nav {
+    background-color: #1d618b;
+}
+nav ul {
+    list-style-type: none;
+    border-top: 3px solid rgb(156, 124, 34);
+    border-bottom: 3px solid rgb(156, 124, 34);
+    margin-block-start: -6px;
+    margin-block-end: 2px;
+}
+nav ul li {
+    display: inline-block;
+    padding:0 auto;
+    margin:10px;
+}
+nav ul li:first-of-type{
+    font-weight: bold;
+    background-color:rgb(156, 124, 34);
+    color:#000;
+    padding:30px;
+    margin:0 auto;
+}
+
+nav ul li a:link,
+nav ul li a:visited,
+nav ul li a:hover,
+nav ul li a:active {
+    /* Ref: https://stackoverflow.com/a/49783868 for why inline-block is added */
+    display: inline-block;
+    text-transform: capitalize;
+    padding: 5px;
+    margin: 10px 25px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav ul li a.router-link-active:link,
+nav ul li a.router-link-active:visited,
+nav ul li a.router-link-active:hover,
+nav ul li a.router-link-active:active {
+    text-decoration: none;
+    color: #000;
+    /* background-color: #CD96CD; */
+    cursor: inherit;
+}
+
+#main {
+    height: 100%;
+    max-width:75%;
+    min-width:60%;
+    margin: 0 auto;
+    padding-top:1.5em;
+    padding-bottom:6em;
+    background-color:#fff;
+    color:#000;
+}
+button.yes,
+button.no {
+    min-width:100px;
+    width:100px;
+    margin: 0 10px;
+    padding:10px 15px;
+    background: rgb(255,120,156);
+    background: linear-gradient(0deg, rgba(255,120,156,1) 56%, rgba(254,212,76,1) 100%);
+	border-radius:10px;
+	border:1px solid rgb(254,212,76);
+	display:inline-block;
+	text-decoration:none;
+    font-size:1.1em;
+    color:#fff;
+}
+button.filter1,
+button.filter2 {
+    min-width:3rem;
+    width:9rem;
+    margin: 0 10px 25px;
+    padding:10px 15px;
+    background: rgb(255,120,156);
+    background: linear-gradient(0deg, rgba(255,120,156,1) 56%, rgba(254,212,76,1) 100%);
+	border-radius:10px;
+	border:1px solid rgb(254,212,76);
+	display:inline-block;
+	text-decoration:none;
+    font-size:.9em;
+    color:#fff;
+}
+button.no, button.filter2 {
+    background: rgb(73,224,247);
+    background: linear-gradient(180deg, rgba(73,224,247,1) 5%, rgba(158,76,254,1) 100%);
+    border:1px solid rgb(73,224,247);
+}
+.show-movie,
+.show-meal,
+.show-drink{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    height:100%;
+}
+.left {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.right {
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+
+.left img {
+    max-width:65%;
+    width:65%;
+}
+.full {
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+h2.title {
+    margin:2px auto;
+}
+p.notes {
+    margin-top:3px;
+    font-size: .9em;
+    line-height:1.3em;
+}
+.rating {
+    background-color:rgb(255,120,156);
+    padding:3px 15px;
+    color:#000;
+}
+.serving {
+    background-color:rgb(132, 206, 255);
+    padding:3px 15px;
+    margin-left:5px;
+    color:#000;
+}
+.tagline {
+    font-style: italic;
+}
+.synopsis {
+    text-align:justify;
+    line-height:1.1em;
+}
+.url a:link, 
+.url a:visited,
+.url a:hover,
+.url a:active{
+    font-weight:bold;
+    color:  rgb(255, 173, 195);
+}
+#credits-page ul {
+    list-style-type: none;
+
+}
+td, th {
+    border: 1px solid black;
+  }
+  
+table {
+    border: 2px solid black;
+    margin: auto;
+    width: 90%;
+    border-collapse: collapse;
+  }
+  table tr {
+    width: 100%;
+    border-collapse: collapse;
+  }
+img.thumb {
+    max-width:150px;
+}
+
+
+ul.decision-list {
+  display: inline-grid;
+  grid-template-columns: repeat(auto-fit, 150px);
+  min-width: 50vw;
+  
+  /* decorative properties */
+  grid-gap: 10px;
+  padding: 0;
+  list-style: none;
+  
+  /* center the grid */
+  position: relative;
+  left: 25vw;
+  transform: translateX(-50%);
+}
+ul.decision-list li {
+  height: 150px;
+}
+.selected-display {
+    width:100%;
+    margin: 0;
+}
+
+ul.decision-list li  {
+    position: relative;
+    overflow: hidden;
+}
+
+ul.decision-list li>.rejected:before, ul.decision-list li>.rejected:after {
+    position: absolute;
+    content: '';
+    background:rgba(255, 0, 0, 0.5);
+    display: block;
+    width: 100%;
+    height: 30px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+ul.decision-list li>.rejected:after {
+    -webkit-transform: rotate(45deg);    
+}
+
+.course-details {
+    max-width:80%;
+    margin: auto;
+    text-align:left;
+}
+.course-details h1, 
+.course-details h2,
+.course-details p.last-taught,
+.course-details p.format {
+    text-align:center;
+}

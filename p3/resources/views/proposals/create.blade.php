@@ -8,10 +8,9 @@ Create new proposal
 @endsection
 
 @section('header')
-<h1>Propose a Course</h1>
-
 @endsection
 
 @section('content')
+<h1>Propose a Course</h1>
 Some Content here.
 @endsection

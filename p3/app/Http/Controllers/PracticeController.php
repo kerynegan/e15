@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class PracticeController extends Controller
 {   
+
+    public function practice9(Request $request)
+    {
+        $user = Auth::user();
+
+        dump($user->first_name.' has taught the following courses: ');
+    
+        # Note how we can treate the `books` relationship as a dynamic propert ($user->books)
+        foreach ($user->courses as $course) {
+            dump($course->subject_code . ' ' . $course->college_code . $course->number);
+        }
+    }
     //course + instructors
     public function practice8(Request $request)
     {

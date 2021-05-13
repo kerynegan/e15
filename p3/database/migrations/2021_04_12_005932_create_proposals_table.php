@@ -37,7 +37,7 @@ class CreateProposalsTable extends Migration
             $table->text('proposed_section_note')->nullable();
             $table->text('proposed_prerequisite')->nullable();
             $table->text('proposed_description');
-            $table->text('proposed_comment');
+            $table->text('proposed_comment')->nullable();
         });
     }
 
