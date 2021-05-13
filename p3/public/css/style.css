@@ -204,61 +204,10 @@ table {
   table tr {
     width: 100%;
     border-collapse: collapse;
-  }
-img.thumb {
-    max-width:150px;
-}
+  } 
 
-
-ul.decision-list {
-  display: inline-grid;
-  grid-template-columns: repeat(auto-fit, 150px);
-  min-width: 50vw;
-  
-  /* decorative properties */
-  grid-gap: 10px;
-  padding: 0;
-  list-style: none;
-  
-  /* center the grid */
-  position: relative;
-  left: 25vw;
-  transform: translateX(-50%);
-}
-ul.decision-list li {
-  height: 150px;
-}
-.selected-display {
-    width:100%;
-    margin: 0;
-}
-
-ul.decision-list li  {
-    position: relative;
-    overflow: hidden;
-}
-
-ul.decision-list li>.rejected:before, ul.decision-list li>.rejected:after {
-    position: absolute;
-    content: '';
-    background:rgba(255, 0, 0, 0.5);
-    display: block;
-    width: 100%;
-    height: 30px;
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-}
-
-ul.decision-list li>.rejected:after {
-    -webkit-transform: rotate(45deg);    
-}
-
-.course-details {
+.course-details,
+.proposal-details {
     max-width:80%;
     margin: auto;
     text-align:left;
@@ -266,6 +215,11 @@ ul.decision-list li>.rejected:after {
 .course-details h1, 
 .course-details h2,
 .course-details p.last-taught,
-.course-details p.format {
+.course-details p.format,
+.proposal-details  h1, 
+.proposal-details  h2,
+.proposal-details  p.last-taught,
+.proposal-details  p.previous-format,
+.proposal-details  p.format {
     text-align:center;
 }

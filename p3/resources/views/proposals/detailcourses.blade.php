@@ -37,6 +37,6 @@ Show Detailed Courses Page
         @endif
     </div>
     <p class='repropose-ask'>Would you like to repropose this course?</p>
-    <button>Repropose {{$course->subject_code}} {{$course->college_code}}{{$course->number}}</button>
+    <a href='/proposals/create/{{$course->id}}'><button>Repropose {{$course->subject_code}} {{$course->college_code}}{{$course->number}}</button></a> 
 @endif
 @endsection

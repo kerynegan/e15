@@ -52,7 +52,12 @@ Note: I specifically used a curated JSON file isntead of the Faker data. It felt
 + [Lorem ipsum generator](https://www.freeformatter.com/lorem-ipsum-generator.html)
 + [XLS to JSON](https://beautifytools.com/excel-to-json-converter.php)
 
+### Other resources
 + [CSS gradient tool for page background](https://cssgradient.io/)
++ [Dusk selector error fixed by updating APP_URL from localhost to http://e15p3.loc/ ](https://stackoverflow.com/questions/48567518/laravel-dusk-nosuchelementexception-unable-to-locate-element)
++ [Modified this Canva template for the logo](https://www.canva.com/templates/EADhqLkLnzk-green-and-blue-community-college-logo/)
++ [Panicked search for rolling back my git repo because I installed Bouncer right into my P3 instead of testing it elsewhere first](https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit)
+
 
 
 ## Notes for instructor

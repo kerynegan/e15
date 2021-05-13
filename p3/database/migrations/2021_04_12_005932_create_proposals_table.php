@@ -20,8 +20,8 @@ class CreateProposalsTable extends Migration
             $table->unsignedSmallInteger('previous_crn')->nullable();
             $table->char('subject_code', 4)->nullable();
             $table->char('college_code', 2)->nullable();
-            $table->string('number', 7)->nullable();
-            $table->foreignId('course_id')->nullable();
+            $table->unsignedMediumInteger('number')->nullable();
+            $table->foreignId('course_id')->nullable();       
             $table->string('previous_schedule_type', 2)->nullable();
             $table->string('previous_format', 60)->nullable();
             $table->string('department_code', 4)->nullable();
@@ -29,7 +29,7 @@ class CreateProposalsTable extends Migration
             $table->text('previous_note')->nullable();
             $table->text('previous_section_note')->nullable();
             $table->text('previous_prerequisite')->nullable();
-            $table->text('prevous_description')->nullable();
+            $table->text('previous_description')->nullable();
             $table->enum('proposed_term', ['fall', 'spring']);          
             $table->string('proposed_format', 60);
             $table->string('proposed_title', 135);

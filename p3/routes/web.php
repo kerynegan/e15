@@ -12,8 +12,8 @@ Route::get('/', [PageController::class, 'show']);
 Route::any('/practice/{n?}', [PracticeController::class, 'index']);
 
 Route::group(['middleware' => 'auth'], function () {
-    //go to create new proposal page and create/store 
-    Route::get('/proposals/create', [ProposalController::class, 'create']);
+    //go to create new proposal page and create/store. Optional id field is to pull course id to use in reproposal.
+    Route::get('/proposals/create/{id?}', [ProposalController::class, 'create']);
     Route::post('/proposals', [ProposalController::class, 'store']);
 
     //show my proposed courses in index and in detailed view

@@ -18,6 +18,12 @@ class User extends Authenticatable
         # Define a one-to-many relationship.
         return $this->hasMany('App\Models\Course');
     }
+    public function proposals()
+    {
+        # Author has many Books
+        # Define a one-to-many relationship.
+        return $this->hasMany('App\Models\Proposal');
+    }
 
     /**
      * The attributes that are mass assignable.

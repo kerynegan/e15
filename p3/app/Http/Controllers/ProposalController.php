@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 class ProposalController extends Controller
 {
     //GET index of courses i've proposed ('.../proposals')
-    public function showproposals() {
-        return view('proposals/showproposals');
+    public function showproposals(Request $request) {
+        $proposals = $request->user()->proposals;
+        return view('proposals/showproposals', ['proposals' => $proposals]);
     }
 
     //GET detailed proposal ('.../proposals/{id}/')
-    public function detailproposals() {
-        return view('proposals/detailproposals');
+    public function detailproposals(Request $request, $id) {
+        $proposal = $request->user()->proposals->where('id', '=', $id)->first();
+        return view('proposals/detailproposals', ['proposal' => $proposal]);
     }   
 
     //GET page to confirm deletion of proposal by id ('.../proposals/{id}/delete')
@@ -43,9 +45,24 @@ class ProposalController extends Controller
     }    
 
     //GET the create new proposal form ('.../proposals/create')
-    public function create() {
+    public function create (Request $request, $id = null) {
+        //if course id is not null, pull the course's data and prefill the proposal's variables.
+        if ($id != null) {
+           $course = $request->user()->courses->find($id);
+           dd($course->id);
+            return view('proposals/create')->with('course', $course);
+        }
         return view('proposals/create');
+        
     }   
+    public function makeRequest(Request $request, $id=null)
+    {
+        if ($id != null) {
+            $target = Partner::find($id);
+            return view('pages.makeRequest')->with('target', $target);
+        }
+        return view('pages.makeNullRequest');
+    }
     
     //POST the form data to the proposals table (redirects to ('.../proposals')
     public function store() {
