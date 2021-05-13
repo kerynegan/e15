@@ -97,18 +97,9 @@ nav ul li a.router-link-active:active {
 }
 button.yes,
 button.no {
-    min-width:100px;
-    width:100px;
-    margin: 0 10px;
-    padding:10px 15px;
-    background: rgb(255,120,156);
-    background: linear-gradient(0deg, rgba(255,120,156,1) 56%, rgba(254,212,76,1) 100%);
-	border-radius:10px;
-	border:1px solid rgb(254,212,76);
-	display:inline-block;
-	text-decoration:none;
-    font-size:1.1em;
-    color:#fff;
+  
+    padding:5px 15px;
+
 }
 button.filter1,
 button.filter2 {
@@ -207,7 +198,8 @@ table {
   } 
 
 .course-details,
-.proposal-details {
+.proposal-details,
+.proposal-admin-details {
     max-width:80%;
     margin: auto;
     text-align:left;
@@ -220,7 +212,12 @@ table {
 .proposal-details  h2,
 .proposal-details  p.last-taught,
 .proposal-details  p.previous-format,
-.proposal-details  p.format {
+.proposal-details  p.format,
+.proposal-admin-details  h1, 
+.proposal-admin-details  h2,
+.proposal-admin-details  p.last-taught,
+.proposal-admin-details  p.previous-format,
+.proposal-admin-details  p.format{
     text-align:center;
 }
 input:read-only,

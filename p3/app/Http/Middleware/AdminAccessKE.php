@@ -18,13 +18,15 @@ class AdminAccessKE
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role == 'admin')
+        if (Auth::user() && Auth::user()->role == 'admin')
         {
     
             return $next($request);
            
         } else{
-            return redirect()->back();
+            return redirect('/proposals')->with([
+                'flash-alert' => 'Access Denied. You do not have sufficient permissions to access that page.'
+            ]);
         }
     
         

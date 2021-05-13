@@ -22,14 +22,15 @@ Detail Proposals Page
 @elseif($proposal)
     <div class='proposal-details' dusk='proposal-details'>
         @if($proposal->subject_code)
-            <h1>{{$proposal->subject_code}} {{$proposal->college_code}}{{$proposal->number}}</h1>
+            <h1>{{ucfirst($proposal->proposed_term)}} Term: {{$proposal->subject_code}} {{$proposal->college_code}}{{$proposal->number}}</h1>
         @else
-            <h1>New Course</h1>
+            <h1>{{$proposal->proposed_term}}: New Course</h1>
         @endif
         <h2>{{$proposal->proposed_title}}</h2>
         @if($proposal->previous_term_code)
         <p class='last-taught' dusk='last-taught'>Last taught in: {{$proposal->previous_term_code}} as CRN: {{$proposal->previous_crn}}</p>
         @endif
+
 
         @if($proposal->previous_format)
             <p class='previous-format' dusk='previous-format'>Previous Format: {{$proposal->previous_format}}</p>

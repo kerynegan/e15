@@ -26,7 +26,7 @@ Show Proposals Page
             </tr>
             @foreach($proposals as $proposal)            
             <tr>
-                <td>{{$proposal->proposed_term}}</td>
+                <td>{{ucfirst($proposal->proposed_term)}} Term</td>
                 <td><a href='proposals/{{$proposal->id}}'>
                     @if($proposal->subject_code)
                         {{$proposal->subject_code}} {{$proposal->college_code}}{{$proposal->number}}

@@ -11,90 +11,84 @@ use App\Models\User;
 
 class ProposalController extends Controller
 {
+//ADMIN ONLY
 
-
+    //GET index of all proposals (admin roles only)
     public function admin(Request $request) {
         $proposals = Proposal::with('user')->get();
-        return view('proposals/admin', ['proposals' => $proposals]);
+        foreach ($proposals as $proposal) {
+            $first_name = $proposal->user->first_name;
+            $last_name = $proposal->user->last_name;
+            $email = $proposal->user->email;
+        }
+        return view('proposals/admin', ['proposals' => $proposals, 'first_name' => $first_name, 'last_name' => $last_name, 'email' => $email]);
     }
-
+    //GET details of any proposed course (admin roles only)
     public function admindetails(Request $request, $id) {
-        $proposal = $request->proposals->where('id', '=', $id)->first();
-        return view('proposals/admindetails', ['proposal' => $proposal]);
+        $proposal = Proposal::with('user')->find($id);
+        $first_name = $proposal->user->first_name;
+        $last_name = $proposal->user->last_name;
+        $email = $proposal->user->email;
+        return view('proposals/admindetails', ['proposal' => $proposal, 'first_name' => $first_name, 'last_name' => $last_name, 'email' => $email]);
     }  
-    //GET index of courses i've proposed ('.../proposals')
+
+//USER OWN PROPOSALS
+
+    //GET index of proposals (by user for own proposals)
     public function showproposals(Request $request) {
         $proposals = $request->user()->proposals;
         return view('proposals/showproposals', ['proposals' => $proposals]);
     }
 
-    //GET detailed proposal ('.../proposals/{id}/')
+    //GET details of a single proposal(by user for own proposals)
     public function detailproposals(Request $request, $id) {
         $proposal = $request->user()->proposals->where('id', '=', $id)->first();
         return view('proposals/detailproposals', ['proposal' => $proposal]);
     }   
 
-    //GET page to confirm deletion of proposal by id ('.../proposals/{id}/delete')
+    //GET confirm deletion of a proposal by id (by user for own proposals)
     public function delete(Request $request, $id) {
-            $proposal = Proposal::with('user')->where('id', '=', $id)->first();
-            // $proposal = $request->user()->proposals->where('id', '=', $id)->first();
-    
+            $proposal = Proposal::with('user')->where('id', '=', $id)->first();  
             if (!$proposal) {
                 return redirect('/proposals')->with([
                     'flash-alert' => 'Proposal not found.'
                 ]);
             }
-    
         return view('proposals/delete', ['proposal' => $proposal]);
     } 
 
-    //DELETE a proposal by id ('.../proposals/{id}')
+    //DELETE a proposal by id (by user for own proposals)
     public function destroy(Request $request, $id) {
-
         $proposal = $request->user()->proposals->where('id', '=', $id)->first();
-
-        // $proposal->users()->detach();
-
         $proposal->delete();
-
         return redirect('/proposals')->with([
             'flash-alert' => '“' . $proposal->proposed_title . '” was deleted.'
         ]);
     }
 
-    //GET index of courses i've taught in previous terms ('.../courses')
+//USER OWN COURSES
+
+    //GET index of previusly taught courses
     public function showcourses(Request $request) {
             $courses = $request->user()->courses->sortBy('subject_code');
             return view('proposals/showcourses', ['courses' => $courses]);
     }   
 
-    //GET details of course i taught in previous term ('.../courses/{id}')
+    //GET details of single previously taught course
     public function detailcourses(Request $request, $id) {
         $course = $request->user()->courses->where('id', '=', $id)->first();
         // dd($course->toArray());
         return view('proposals/detailcourses', ['course' => $course]);
     }    
-    // dead for now 
-    // //GET the create new proposal form ('.../proposals/create')
-    // public function create (Request $request, $id = null) {
-    //     //if course id is not null, pull the course's data and prefill the proposal's variables.
-    //     if ($id != null) {
-    //         // $user = $request->user();
-    //         $course = $request->user()->courses->find($id);
-    //     //    dd($course->id);
-    //         return view('proposals/create')->with('course', $course);
-    //     }
-    //     return view('proposals/create');
-      
-    // }   
-        //GET the create new proposal form ('.../proposals/create')
-        public function create (Request $request) {
+ 
+//NEW PROPOSAL FORM
 
-            return view('proposals/create');
-          
-        }   
+    //GET for new proposal form
+    public function create (Request $request) {
+        return view('proposals/create');        
+    }   
     
-    //POST the form data to the proposals table (redirects to ('.../proposals')
+    //POST for new proposals
     public function store(Request $request) {
 
         $user = $request->user();
@@ -107,21 +101,7 @@ class ProposalController extends Controller
 
         $proposal = new Proposal();
 
-        // $proposal->previous_term_code = null; 
-        // $proposal->previous_crn = null; 
-        // $proposal->subject_code = null; 
-        // $proposal->college_code = null; 
-        // $proposal->number = null; 
-        // $proposal->course_id = null; 
-        $proposal->user_id = $user->id;
-        // $proposal->previous_schedule_type = null; 
-        // $proposal->previous_format = null; 
-        // $proposal->department_code = null; 
-        // $proposal->previous_title =  null; 
-        // $proposal->previous_note =  null; 
-        // $proposal->previous_section_note = null; 
-        // $proposal->previous_prerequisite = null;         
-        // $proposal->previous_description =  null;     
+        $proposal->user_id = $user->id;  
         $proposal->user_id = $user->id;
         $proposal->proposed_term = $request->proposed_term;
         $proposal->proposed_format = $request->proposed_format;
@@ -131,20 +111,18 @@ class ProposalController extends Controller
         $proposal->proposed_prerequisite = $request->proposed_prerequisite;          
         $proposal->proposed_description =  $request->proposed_course_description;
         $proposal->proposed_comment = $request->proposed_comment; 
-
-       
+   
         $proposal->save(); 
         return redirect('/proposals')->with([
             'flash-alert' => 'Your proposal was created.'
         ]);
-
-        // dd($request->toArray());
     }   
-    
+
+//REPROPOSING COURSES PROPOSAL FORM
+
     //GET for the reproposal form
     public function repropose (Request $request, $id) {
         $course = $request->user()->courses->find($id);
-
         return view('proposals/repropose', ['course' => $course]);
         
     }  
@@ -159,11 +137,9 @@ class ProposalController extends Controller
             'proposed_course_description' => 'required',
         ]);
 
-            $course = $request->user()->courses->find($id);
+        $course = $request->user()->courses->find($id);
      
-
         $proposal = new Proposal();
-
 
         $proposal->previous_term_code = $course->term_code ?? null;
         $proposal->previous_crn = $course->crn ?? null;
@@ -187,68 +163,16 @@ class ProposalController extends Controller
         $proposal->proposed_section_note = $request->proposed_section_note;
         $proposal->proposed_prerequisite = $request->proposed_prerequisite;          
         $proposal->proposed_description =  $request->proposed_course_description;
-        $proposal->proposed_comment = $request->proposed_comment; 
-
-
-    //     $proposal->save();  
+        $proposal->proposed_comment = $request->proposed_comment;  
        
         $proposal->save(); 
 
         return redirect('/proposals')->with([
-            'flash-alert' => 'Your proposal was created.'
+            'flash-alert' => 'Your reproposal was created.'
         ]);
-
-    }   
-   //dead for now  
-    // //POST the form data to the proposals table (redirects to ('.../proposals')
-    // public function store(Request $request, $id = null) {
-    //     if ($id != null) {
-    //         $course = $request->user()->courses->find($id);
-    //     }
-    //     $user = $request->user();
-    //     $request->validate(
-    //         [
-    //         'proposed_term ' => 'required',
-    //         'proposed_format' => 'required',
-    //         'proposed_title' => 'required',
-    //         'proposed_course_description' => 'required',
-    //         ]
-    //     );
-
-    //     $proposal = new Proposal();
-
-    //     if($course) {
-    //         $proposal->previous_term_code = $course->term_code ?? null;
-    //         $proposal->previous_crn = $course->crn ?? null;
-    //         $proposal->subject_code = $course->subject_code ?? null; 
-    //         $proposal->college_code = $course->college_code ?? null;
-    //         $proposal->number = $course->number ?? null;
-    //         $proposal->course_id = $course->id ?? null;
-    //         $proposal->previous_schedule_type = $course->schedule_type ?? null;
-    //         $proposal->previous_format = $course->format ?? null;
-    //         $proposal->department_code = $course->department_code ?? null;
-    //         $proposal->previous_title =  $course->title ?? null;
-    //         $proposal->previous_note =  $course->note ?? null;
-    //         $proposal->previous_section_note = $course->section_note ?? null;
-    //         $proposal->previous_prerequisite = $course->prerequisite ?? null;          
-    //         $proposal->previous_description =  $course->description ?? null;
-    //     }
-        
-    //     $proposal->user_id = $user->id;
-    //     $proposal->proposed_term = $request->proposed_term;
-    //     $proposal->proposed_format = $request->proposed_format;
-    //     $proposal->proposed_title =  $request->proposed_title;
-    //     $proposal->proposed_note =  $request->proposed_note;
-    //     $proposal->proposed_section_note = $request->proposed_section_note;
-    //     $proposal->proposed_prerequisite = $request->proposed_prerequisite;          
-    //     $proposal->proposed_description =  $request->proposed_course_description;
-    //     $proposal->proposed_comment = $request->proposed_comment; 
-
-    //     $proposal->save();  
-
-    //     // $action = new StoreNewBook((object) $request->all());
-    //     return redirect('/proposals/create');
-    //     // ->with(['flash-alert' => 'The book “'.$action->results->title.'” was added.']);
-    // }   
-
+    }     
+    //GET index of proposals (by user for own proposals)
+    public function denied(Request $request) {
+        return view('access-denied');
+    }
 }

@@ -20,16 +20,15 @@
                 <li><a href='/proposals/create'>Propose New Course</a> 
             @endif               
                 <li>
+            @if(Auth::user() && Auth::user()->role == 'admin')
+                <a href='/proposals/admin' dusk='admin-link'>ADMIN Proposals</a></li>
+                <li>
+            @endif 
             @if(!Auth::user())
                     <a href='/login' dusk='login-link'>Login</a></li>
                     <li><a href='/register' dusk='register-link'>Register</a></li>
                     <li>
-            @else
-            {{-- @if(!Auth::user()->role->is)
-                    <a href='/login' dusk='login-link'>Login</a></li>
-                    <li><a href='/register' dusk='register-link'>Register</a></li>
-                    <li>
-            @else --}}
+            @else 
                     <form method='POST' id='logout' action='/logout' dusk='logout-link'>
                         {{ csrf_field() }}
                         <a href='#' onClick='document.getElementById("logout").submit();'>Logout</a>

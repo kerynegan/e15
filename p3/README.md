@@ -1,10 +1,3 @@
-Notes to self for tomorrow
-+ proposals can be associated with one course
-+ proposals can be associated with one user
-+ courses can be associated to one user
-+ courses can be associated to many proposals
-+ users can be associated to many courses
-+ users can be associated to many proposals
 
 # Project 3
 + By: Keryn Egan
@@ -12,52 +5,42 @@ Notes to self for tomorrow
 
 
 ## Feature summary
-*Outline a summary of features that your application has. The following details are from a hypothetical project called "Movie Tracker". Note that it is similar to Bookmark, yet it has its own unique features. Delete this example and replace with your own feature summary*
 
 + Users (instructors) can register/log in.
 + Users can view in aggregate courses that they have previously taught (only their own courses).
 + Users can view in detailed mode courses that they have previously taught.
-+ Users are restricted from accessing courses that they did not teach.
++ Users are restricted from accessing courses that they did not teach using Auth middleware routes
 + Users can create a proposal to teach a new course.
 + Users can repropose a course that they have taught previously.
 + Users can delete a proposal. 
-
-
-+ Users can add/update/delete movies in their collection (title, release date, director, writer, summary, category)
-+ There's a file uploader that's used to upload poster images for each movie
-+ User's can toggle whether movies in their collection are public or private
-+ Each user has a public profile page which presents a short bio about their movie tastes, as well as a list of public movies in their collection
-+ Each user has their own account page where they can edit their bio, email, password
-+ Users can clone movies from another user's public collection into their collection
-+ The home page features
-  + a stream of recently added public movies
-  + a list of categories, with a link to each category that shows a page of movies (with links) within that category
-
++ Admin (users with the users->role = 'admin') can access all proposals regardless of who created it via a tiny Middleware I wrote (Middleware\AdminAccessKE.php)
++ Admin can view in detailed mode proposals that are not theirs via the same Middleware.
++ The Middleware prevents non-admin (other users are seeded to basic 'instructor' roles) from accessing those pages.
   
 ## Database summary
-*Describe the tables and relationships used in your database. Delete the examples below and replace with your own info.*
-
 My application has 3 tables in total (`users`, `courses`, `proposals`)
 
 + There is a one-to-many relationship between `users` and `courses` 
   (a user may have taught many previous courses, but each course only has one instructor(user))
 + There is a one-to-many relationship between `users` and `proposals` 
-  (a user can make many proposals, but each proposal is owned by one user)
-+ There's a one-to-many relationship between `proposals` and `courses` 
-  (a course can be proposed as new many times, but each proposal can only be (optionally) associated with one prior course)
+  (a user can make many proposals, but each proposal is owned by one user.)
++ There is no table relationship between `proposals` and `courses`. 
+  (I used courses as a seed for some proposal data if the course is being reproposed, but did not want to persist a relationship between the two tables.)
 
 ## Outside resources
-Note: I specifically used a curated JSON file isntead of the Faker data. It felt a little silly, but I liked the control, so here's the resources I used for those:
-+ [Fake name + email address generator](https://homepage.net/name_generator/)
+Note: I specifically used a curated JSON file for the courses isntead of using the Faker data. It felt a little silly, but I liked the control at first, so here's the resources I used for those:
 + [Lorem ipsum generator](https://www.freeformatter.com/lorem-ipsum-generator.html)
 + [XLS to JSON](https://beautifytools.com/excel-to-json-converter.php)
+
+I later came around on Faker and used it for seeding some new proposals.
 
 ### Other resources
 + [CSS gradient tool for page background](https://cssgradient.io/)
 + [Dusk selector error fixed by updating APP_URL from localhost to http://e15p3.loc/ ](https://stackoverflow.com/questions/48567518/laravel-dusk-nosuchelementexception-unable-to-locate-element)
 + [Modified this Canva template for the logo](https://www.canva.com/templates/EADhqLkLnzk-green-and-blue-community-college-logo/)
 + [Panicked search for rolling back my git repo because I installed Bouncer right into my P3 instead of testing it elsewhere first](https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit)
-
++ [Creating my own simple route guard for user roles](https://stackoverflow.com/questions/52901316/laravel-give-user-access-to-specific-route-when-conditions-are-met)
++ [PHP Docs Capitalize first word](https://www.php.net/manual/en/function.ucfirst.php)
 
 
 ## Notes for instructor
