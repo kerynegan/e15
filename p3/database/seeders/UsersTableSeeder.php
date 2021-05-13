@@ -21,46 +21,46 @@ class UsersTableSeeder extends Seeder
     {
         //seeding 10 users to relate to course data
         $user = User::updateOrCreate(
-            ['email' => 'jill@harvard.edu', 'first_name' => 'Jill', 'last_name' =>'Harvard'],
+            ['email' => 'jill@harvard.edu', 'first_name' => 'Jill', 'last_name' =>'Harvard', 'role' => 'admin'],
             ['password' => Hash::make('asdfasdf')
         ]);
         
         $user = User::updateOrCreate(
-            ['email' => 'jamal@harvard.edu', 'first_name' => 'Jamal', 'last_name' =>'Harvard'],
+            ['email' => 'jamal@harvard.edu', 'first_name' => 'Jamal', 'last_name' =>'Harvard', 'role' => 'instructor'],
             ['password' => Hash::make('asdfasdf')
         ]);
         $user = User::updateOrCreate(
-            ['email' => 'ryan@harvard.edu', 'first_name' => 'Ryan', 'last_name' =>'Harvard'],
-            ['password' => Hash::make('asdfasdf')
-        ]);
-        
-        $user = User::updateOrCreate(
-            ['email' => 'keryn@harvard.edu', 'first_name' => 'Keryn', 'last_name' =>'Harvard'],
-            ['password' => Hash::make('asdfasdf')
-        ]);
-        $user = User::updateOrCreate(
-            ['email' => 'patrick@harvard.edu', 'first_name' => 'Patrick', 'last_name' =>'Harvard'],
+            ['email' => 'ryan@harvard.edu', 'first_name' => 'Ryan', 'last_name' =>'Harvard', 'role' => 'instructor'],
             ['password' => Hash::make('asdfasdf')
         ]);
         
         $user = User::updateOrCreate(
-            ['email' => 'susan@harvard.edu', 'first_name' => 'Susan', 'last_name' =>'Harvard'],
+            ['email' => 'keryn@harvard.edu', 'first_name' => 'Keryn', 'last_name' =>'Harvard', 'role' => 'instructor'],
             ['password' => Hash::make('asdfasdf')
         ]);
         $user = User::updateOrCreate(
-            ['email' => 'robert@harvard.edu', 'first_name' => 'Robert', 'last_name' =>'Harvard'],
+            ['email' => 'patrick@harvard.edu', 'first_name' => 'Patrick', 'last_name' =>'Harvard', 'role' => 'instructor'],
+            ['password' => Hash::make('asdfasdf')
+        ]);
+        
+        $user = User::updateOrCreate(
+            ['email' => 'susan@harvard.edu', 'first_name' => 'Susan', 'last_name' =>'Harvard', 'role' => 'instructor'],
+            ['password' => Hash::make('asdfasdf')
+        ]);
+        $user = User::updateOrCreate(
+            ['email' => 'robert@harvard.edu', 'first_name' => 'Robert', 'last_name' =>'Harvard', 'role' => 'instructor'],
             ['password' => Hash::make('asdfasdf')
         ]);     
         $user = User::updateOrCreate(
-            ['email' => 'deborah@harvard.edu', 'first_name' => 'Deborah', 'last_name' =>'Harvard'],
+            ['email' => 'deborah@harvard.edu', 'first_name' => 'Deborah', 'last_name' =>'Harvard', 'role' => 'instructor'],
             ['password' => Hash::make('asdfasdf')
         ]);
         $user = User::updateOrCreate(
-            ['email' => 'jeni@harvard.edu', 'first_name' => 'Jeni', 'last_name' =>'Harvard'],
+            ['email' => 'jeni@harvard.edu', 'first_name' => 'Jeni', 'last_name' =>'Harvard', 'role' => 'instructor'],
             ['password' => Hash::make('asdfasdf')
         ]);
         $user = User::updateOrCreate(
-            ['email' => 'sheila@harvard.edu', 'first_name' => 'Sheila', 'last_name' =>'Harvard'],
+            ['email' => 'sheila@harvard.edu', 'first_name' => 'Sheila', 'last_name' =>'Harvard', 'role' => 'admin'],
             ['password' => Hash::make('asdfasdf')
         ]);
         # Three different examples of how to add users

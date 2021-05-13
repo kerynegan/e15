@@ -223,3 +223,7 @@ table {
 .proposal-details  p.format {
     text-align:center;
 }
+input:read-only,
+textarea:read-only {
+    background-color: rgb(233, 233, 233);
+  }

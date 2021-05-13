@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->string('first_name');
             $table->string('last_name');
+            $table->enum('role', ['instructor', 'admin']);
         });
     }
 

@@ -4,27 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Proposal;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PracticeController extends Controller
 {   
 
+        //course + instructors
+        public function practice10(Request $request)
+        {
+            # Eager load the author with the book
+            $proposals = Proposal::with('user')->get();
+    
+            // foreach ($courses as $course) {
+            //     if ($course->user) {
+            //         dump($course->user->first_name.' '.$course->user->last_name.' taught '.$course->subject_code . ' ' . $course->college_code . $course->number);
+            //     } else {
+            //         dump($course->$course->subject_code . ' ' . $course->college_code . $course->number. ' has no instructor associated with it.');
+            //     }
+            // }
+    
+            dump($proposals->toArray());
+        }
     public function practice9(Request $request)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
 
         // dump($user->first_name.' has taught the following courses: ');
     
-
-        # Note how we can treate the `books` relationship as a dynamic propert ($user->books)
-        foreach ($user->courses as $course) {
-            if($courses->isEmpty())
-                echo "No courses found";
-            else 
-                
-            dump($course->subject_code . ' ' . $course->college_code . $course->number);
-        }
+        $role = Auth::user()->role;
+        dd($role);
     }
     //course + instructors
     public function practice8(Request $request)
