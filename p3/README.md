@@ -11,8 +11,8 @@
 + Users are restricted from accessing courses that they did not teach using Auth middleware routes
 + Users can create a proposal to teach a new course.
 + Users can repropose a course that they have taught previously.
-+ Users can delete a proposal. 
-+ Admin (users with the users->role = 'admin') can access all proposals regardless of who created it via a tiny Middleware I wrote (Middleware\AdminAccessKE.php)
++ Users can delete their own proposals via link on details page. 
++ Admin (users with the users->role = 'admin') can access all proposals regardless of who created it via a tiny Middleware I wrote (Middleware\AdminAccessKE.php). Most credit to outside resource I linked below.
 + Admin can view in detailed mode proposals that are not theirs via the same Middleware.
 + The Middleware prevents non-admin (other users are seeded to basic 'instructor' roles) from accessing those pages.
   
@@ -23,7 +23,7 @@ My application has 3 tables in total (`users`, `courses`, `proposals`)
   (a user may have taught many previous courses, but each course only has one instructor(user))
 + There is a one-to-many relationship between `users` and `proposals` 
   (a user can make many proposals, but each proposal is owned by one user.)
-+ There is no table relationship between `proposals` and `courses`. 
++ There is **no** table relationship between `proposals` and `courses`. 
   (I used courses as a seed for some proposal data if the course is being reproposed, but did not want to persist a relationship between the two tables.)
 
 ## Outside resources
@@ -47,7 +47,7 @@ I later came around on Faker and used it for seeding some new proposals.
 + ADMIN: Jill@harvard.edu is an admin and also has previous courses/proposals of her own.
 + USER: Jamal@harvard.edu is only an instructor/user He should not have access to admin pages.
 
-+ DUSK note: This is going to sound crazy, but a tests of my reproposal form kept failing because the Laravel Debug tool was intercepting the click meant for the submit button! In my .env file I added "DEBUGBAR_ENABLED=false" and it finally fixed the problem and let my tests pass. 
++ DUSK note: This is going to sound crazy, but a tests of my reproposal form kept failing because the Laravel Debug tool was intercepting the click meant for the submit button! In my .env file I added "DEBUGBAR_ENABLED=false" and it finally fixed the problem and let my tests pass. Here's the error:
 
 ```
 Facebook\WebDriver\Exception\ElementClickInterceptedException: element click intercepted: Element <button type="submit" dusk="add-proposal-button" class="btn btn-primary yes">...</button> is not clickable at point (831, 891). Other element would receive the click: <div class="phpdebugbar-header">...</div>
