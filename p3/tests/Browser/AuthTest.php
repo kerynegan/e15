@@ -21,12 +21,25 @@ class AuthTest extends DuskTestCase
                     ->assertVisible('@register-heading')
                     ->type('@register-first-name', 'Joe')
                     ->type('@register-last-name', 'Smith')
-                    ->type('@register-email', 'joe1@harvard.edu')
+                    ->type('@register-email', 'joe2@harvard.edu')
                     ->type('@register-password', 'asdfasdf')
-                    ->type('@register-password-confirm', 'asdfasdf')
+                    ->type('@register-password-confirmation', 'asdfasdf')
                     ->click('@register-button')
-                    ->assertVisible('@welcome-message')
                     ->assertSee('Joe');
+                    
+        });
+    }
+    public function testLogin()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->logout()
+                    ->visit('/')
+                    ->click('@login-link')
+                    ->assertVisible('@login-heading')
+                    ->type('@login-email', 'jill@harvard.edu')
+                    ->type('@login-password', 'asdfasdf')
+                    ->click('@login-button')
+                    ->assertSee('Jill');
         });
     }
 }

@@ -15,12 +15,9 @@ Route::any('/practice/{n?}', [PracticeController::class, 'index']);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('proposals/admin', [ProposalController::class, 'admin'])->middleware('adminaccesske');
     Route::get('proposals/{id}/admin', [ProposalController::class, 'admindetails'])->middleware('adminaccesske');
-    
-    Route::post('proposals/create', [ProposalController::class, 'store']);
-    //go to create new proposal page and create/store. Optional id field is to pull course id to use in reproposal.
-    Route::get('/proposals/create', [ProposalController::class, 'create']);
-    // Route::get('/proposals/create/', [ProposalController::class, 'create']);
 
+    Route::post('proposals/create', [ProposalController::class, 'store']);
+    Route::get('/proposals/create', [ProposalController::class, 'create']);
 
     //show my proposed courses in index and in detailed view
     Route::get('/proposals', [ProposalController::class, 'showproposals']); 

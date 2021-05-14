@@ -57,7 +57,10 @@ Detail Proposals Page
         @endif      
         <p><strong>Proposed Section Notes:</strong> {{$proposal->proposed_section_note}}</p>
         <p><strong>Instructor Comments:</strong> {{$proposal->proposed_comment}}</p>
+
+       <a href='/proposals/{{$proposal->id}}/delete'><button dusk='delete-button'>Delete this proposal</button></a> 
     </div>
+        
 
 @endif
 @endsection

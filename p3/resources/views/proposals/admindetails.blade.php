@@ -55,6 +55,7 @@ Detail Proposals Page
         <p><strong>Instructor Comments:</strong> {{$proposal->proposed_comment}}</p>
 
         <p><strong>Proposed by:</strong> {{$first_name}} {{$last_name}} <strong>E-mail Address: </strong><a href='mailto:{{$email}}'>{{$email}}</a></p>
+
     </div>
 
 @endif

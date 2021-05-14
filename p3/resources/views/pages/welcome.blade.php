@@ -13,7 +13,7 @@ Welcome Page
 
 @section('content')
 @if(Auth::user())
-<h2> Hello {{ Auth::user()->first_name }}! </h2>
+<h2 dusk='auth-heading'> Hello {{ Auth::user()->first_name }}! </h2>
 Welcome to your course proposal tool.<br /><br />
 
 If you have <strong>previously taught courses at HESWEB University,</strong><br />
@@ -26,7 +26,7 @@ please choose <a href="/proposals/create">Propose New Course</a>.<br /><br />
 To <strong>view your existing proposals</strong> from this year,<br />
 choose <a href="/proposals">View My Proposals</a>.
 @else
-<h2> Hello! </h2>
+<h2 dusk='unauth-heading'> Hello! </h2>
 This site is for registered users only. <br />
 <strong>Would you like to<a href="/login"> log in</a> or <a href="/register">register?</a></strong>
 @endif

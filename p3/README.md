@@ -5,7 +5,6 @@
 
 
 ## Feature summary
-
 + Users (instructors) can register/log in.
 + Users can view in aggregate courses that they have previously taught (only their own courses).
 + Users can view in detailed mode courses that they have previously taught.
@@ -41,9 +40,19 @@ I later came around on Faker and used it for seeding some new proposals.
 + [Panicked search for rolling back my git repo because I installed Bouncer right into my P3 instead of testing it elsewhere first](https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit)
 + [Creating my own simple route guard for user roles](https://stackoverflow.com/questions/52901316/laravel-give-user-access-to-specific-route-when-conditions-are-met)
 + [PHP Docs Capitalize first word](https://www.php.net/manual/en/function.ucfirst.php)
++ [.env DEBUGBAR_ENABLED=false. See below note for why](https://stackoverflow.com/questions/48220709/how-to-safely-remove-laravel-debugbar/52528002)
 
 
 ## Notes for instructor
++ ADMIN: Jill@harvard.edu is an admin and also has previous courses/proposals of her own.
++ USER: Jamal@harvard.edu is only an instructor/user He should not have access to admin pages.
+
++ DUSK note: This is going to sound crazy, but a tests of my reproposal form kept failing because the Laravel Debug tool was intercepting the click meant for the submit button! In my .env file I added "DEBUGBAR_ENABLED=false" and it finally fixed the problem and let my tests pass. 
+
+```
+Facebook\WebDriver\Exception\ElementClickInterceptedException: element click intercepted: Element <button type="submit" dusk="add-proposal-button" class="btn btn-primary yes">...</button> is not clickable at point (831, 891). Other element would receive the click: <div class="phpdebugbar-header">...</div>
+```
+
 I hope you like the styling for HESWEB U! The concept made me laugh, so it might amuse you, too. Especially the tagline in the footer :)
 
 Thanks for a great term! I really enjoyed the content of both classes and seeing how the technologies work both on their own and together. 

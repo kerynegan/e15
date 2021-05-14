@@ -53,7 +53,7 @@ Repropose a course
         <input type='text' name='term_code' id='term_code' dusk='term_code' value='{{ $course->term_code }}' readonly><br /><br />
     @endif
         <div class='details'><strong>In which term do you want to teach?</strong></div>
-        <input type='radio' name='proposed_term' id='fall' value='fall' >
+        <input type='radio' name='proposed_term' id='fall' value='fall' checked>
         <label for='fall'>Fall Term</label>
         <input type='radio' name='proposed_term' id='spring' value='spring' >
         <label for='spring'>Spring Term</label><br />
@@ -64,7 +64,7 @@ Repropose a course
         <input type='text' name='format' id='format' dusk='format' value='{{ $course->format }}' readonly><br /><br />
     @endif
         <div class='details'><strong>In which format do you want to teach?</strong></div>
-        <input type='radio' name='proposed_format' id='harvard-course' value='Harvard course' >
+        <input type='radio' name='proposed_format' id='harvard-course' value='Harvard course' checked>
         <label for='harvard-course'>Harvard course</label><br />
         <input type='radio' name='proposed_format' id='live-conference' value='Live web conference' >
         <label for='live-conference'>Live web conference</label><br />
@@ -144,7 +144,7 @@ Repropose a course
         <textarea name='proposed_comment' id='proposed_comment' dusk='proposed_comment' rows="7" cols="60" value=''></textarea><br />
                 @include('includes/error-field', ['fieldName' => 'proposed_comment'])
 
-    <a href="/courses" class='cancel-link' dusk='cancel-link'>Cancel</a>
+    <a href="/courses" class='cancel-link' dusk='cancel-link'>Cancel</a><br><br>
     <button type='submit' dusk='add-proposal-button' class='btn btn-primary yes'>Propose this course</button>
  
 

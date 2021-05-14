@@ -16,12 +16,7 @@ class ProposalController extends Controller
     //GET index of all proposals (admin roles only)
     public function admin(Request $request) {
         $proposals = Proposal::with('user')->get();
-        foreach ($proposals as $proposal) {
-            $first_name = $proposal->user->first_name;
-            $last_name = $proposal->user->last_name;
-            $email = $proposal->user->email;
-        }
-        return view('proposals/admin', ['proposals' => $proposals, 'first_name' => $first_name, 'last_name' => $last_name, 'email' => $email]);
+        return view('proposals/admin', ['proposals' => $proposals]);
     }
     //GET details of any proposed course (admin roles only)
     public function admindetails(Request $request, $id) {

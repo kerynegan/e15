@@ -31,7 +31,7 @@ Create new proposal
         @include('includes/error-field', ['fieldName' => 'proposed_title']) 
 <br />
         <div class='details'><strong>In which term do you want to teach?</strong></div>
-        <input type='radio' name='proposed_term' id='fall' value='fall' >
+        <input type='radio' name='proposed_term' id='fall' value='fall' checked>
         <label for='fall'>Fall Term</label>
         <input type='radio' name='proposed_term' id='spring' value='spring' >
         <label for='spring'>Spring Term</label><br />
@@ -39,7 +39,7 @@ Create new proposal
 <br />
 
         <div class='details'><strong>In which format do you want to teach?</strong></div>
-        <input type='radio' name='proposed_format' id='harvard-course' value='Harvard course' >
+        <input type='radio' name='proposed_format' id='harvard-course' value='Harvard course' checked>
         <label for='harvard-course'>Harvard course</label><br />
         <input type='radio' name='proposed_format' id='live-conference' value='Live web conference' >
         <label for='live-conference'>Live web conference</label><br />

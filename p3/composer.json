@@ -12,11 +12,13 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/fortify": "^1.7",
         "laravel/framework": "^8.12",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "php-webdriver/webdriver": "^1.11"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
         "facade/ignition": "^2.5",
+        "laravel/dusk": "^6.15",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",

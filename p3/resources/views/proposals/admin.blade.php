@@ -21,7 +21,6 @@ Show Proposals Page
             <tr>
                 <th>Term</th>
                 <th>Course (if reproposal)</th>
-                <th>Proposed by</th>
                 <th>Proposed title</th>
             </tr>
             @foreach($proposals as $proposal)            
@@ -34,7 +33,6 @@ Show Proposals Page
                         <p>New Course</p>
                     @endif
                 </a></td>
-                <td>{{$first_name}} {{$last_name}}</td>
                 <td>{{$proposal->proposed_title}}</td>
             </tr>
             @endforeach

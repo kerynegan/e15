@@ -15,9 +15,9 @@
         <ul>
                 <li><a href='/'>Home</a></li>
             @if(Auth::user()) 
-                <li><a href='/proposals'>View My Proposals</a></li>
-                <li><a href='/courses'>Previous Courses</a></li>   
-                <li><a href='/proposals/create'>Propose New Course</a> 
+                <li><a href='/proposals' dusk='my-proposals-link'>View My Proposals</a></li>
+                <li><a href='/courses' dusk='my-courses-link'>Previous Courses</a></li>   
+                <li><a href='/proposals/create' dusk='propose-new-link'>Propose New Course</a> 
             @endif               
                 <li>
             @if(Auth::user() && Auth::user()->role == 'admin')
